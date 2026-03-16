@@ -71,7 +71,9 @@ Route::middleware('auth')->group(function () {
     Route::get('analitica/{history}', [AnaliticaController::class, 'get'])->name('mol.analitica');
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('spectrum/{id}/molecule3d', [SpectrumController::class, 'molecule3d']);
-
+    Route::get('/chemlab-sketcher', function () {
+        return response()->file(public_path('chemlab.html'));
+    });
 });
 
 // admin routes

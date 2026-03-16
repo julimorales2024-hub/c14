@@ -372,4 +372,16 @@ return [
     'submenu.nombre' => 'Por nome',
     'submenu.subestructura' => 'Subestrutura',
     'submenu.tipocarbono' => 'Tipo de carbono',
+
+    'form.busquedas.tiposCarbono' => 'Pesquisa por tipos de carbono',
+
+    # -- Carbon type tab labels --
+    'type.esqueleto' => 'Esqueleto',
+    'type.carbono' => 'Carbonos',
+    'type.heteroatomos' => 'Heteroátomos',
+    'type.tipos' => 'Tipos de carbono',
+    'type.alifaticos' => 'Alifáticos',
+    'type.aromaticos' => 'Aromáticos',
+    'type.olefinicos' => 'Olefínicos',
+    'type.otros' => 'Outros',
 ];

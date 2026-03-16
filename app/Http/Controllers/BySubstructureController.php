@@ -81,9 +81,9 @@ class BySubstructureController extends Controller
     }
 
     public function queryMolecules(Request $request) {
-        if(Session::has('history')) {
-            $history = Session::get('history');
-        }
+        $criteria = [];
+        $history  = Session::has('history') ? Session::get('history') : [];
+
         if(!empty($request->family)) {
             //$molecules->where('family', $request->family);
             $criteria['family'] = $request->family;

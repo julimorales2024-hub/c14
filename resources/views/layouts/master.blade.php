@@ -52,9 +52,7 @@
                 $("#fr").removeClass("inactive");
             } else if (idioma.indexOf("it") > -1) {
                 $("#it").removeClass("inactive");
-            } else {
-                $("#es").removeClass("inactive");
-          } else if (idioma.indexOf("zh") > -1) {
+            } else if (idioma.indexOf("zh") > -1) {
                 $("#zh").removeClass("inactive");
             }
 

@@ -16,20 +16,20 @@ return [
         'stat2'        => 'Datos espectroscópicos de carbono',
         'stat3'        => 'Universidad de Salamanca · 1218 DC',
 
-        'nmrTitle'     => '¿Qué es la RMN de <sup>13</sup>C?',
-        'nmrText1'     => 'La Resonancia Magnética Nuclear de carbono-13 (RMN de <sup>13</sup>C) es una técnica espectroscópica que permite obtener información detallada sobre el esqueleto carbonado de una molécula. Cada átomo de carbono en un entorno químico diferente produce una señal característica —llamada desplazamiento químico— que actúa como una huella digital del compuesto.',
+        'nmrTitle'     => '¿Qué es la RMN de C<sup>13</sup>?',
+        'nmrText1'     => 'La Resonancia Magnética Nuclear de carbono-13 (RMN de C<sup>13</sup>) es una técnica espectroscópica que permite obtener información detallada sobre el esqueleto carbonado de una molécula. Cada átomo de carbono en un entorno químico diferente produce una señal característica —llamada desplazamiento químico— que actúa como una huella digital del compuesto.',
         'nmrText2'     => 'A diferencia de otras técnicas, la RMN de <sup>13</sup>C no destruye la muestra, es altamente reproducible y proporciona información estructural única. NAPROC-13 reúne miles de estos espectros en una sola plataforma de búsqueda.',
 
         'toolsTitle'   => 'Herramientas de búsqueda',
         'tool1'        => 'Busca compuestos directamente por su nombre químico completo o parcial.',
         'tool2'        => 'Dibuja o introduce un fragmento estructural y encuentra todos los compuestos que lo contengan.',
-        'tool3'        => 'Introduce los valores de desplazamiento químico de <sup>13</sup>C de tu espectro y obtén los compuestos más compatibles.',
+        'tool3'        => 'Introduce los valores de desplazamiento químico de C<sup>13</sup> de tu espectro y obtén los compuestos más compatibles.',
         'tool4'        => 'Filtra según la multiplicidad de los carbonos: C, CH, CH₂ o CH₃.',
 
         'historyTitle' => 'Historia del proyecto',
-        'history1'     => 'El grupo de Farmacognosia del Departamento de Ciencias Farmacéuticas de la USAL comienza a compilar datos de RMN de <sup>13</sup>C de productos naturales con el objetivo de crear una base de datos especializada de acceso abierto.',
+        'history1'     => 'El grupo de Farmacologia del Departamento de Ciencias Farmacéuticas de la USAL comienza a compilar datos de RMN de C<sup>13</sup> de productos naturales con el objetivo de crear una base de datos especializada de acceso abierto.',
         'history2'     => 'NAPROC-13 se convierte en una herramienta accesible desde internet, permitiendo a investigadores de todo el mundo consultar los datos sin instalación local.',
-        'history3'     => 'Se incorporan nuevas herramientas de búsqueda y la base de datos supera los 8.000 compuestos registrados con sus datos espectroscópicos.',
+        'history3'     => 'Se incorporan nuevas herramientas de búsqueda y la base de datos supera los 30.000 compuestos registrados con sus datos espectroscópicos.',
         'history4'     => 'La plataforma continúa creciendo con nuevas moléculas, soporte multiidioma y una interfaz renovada.',
         'today'        => 'Hoy',
 

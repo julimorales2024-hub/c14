@@ -359,4 +359,16 @@ Les structures rencontrées dans chacune des recherches peuvent être visualisé
     'submenu.nombre' => 'Par nom',
     'submenu.subestructura' => 'Sous-structure',
     'submenu.tipocarbono' => 'Type de carbone',
+
+    'form.busquedas.tiposCarbono' => 'Recherche par types de carbone',
+
+    # -- Carbon type tab labels --
+    'type.esqueleto' => 'Squelette',
+    'type.carbono' => 'Carbones',
+    'type.heteroatomos' => 'Hétéroatomes',
+    'type.tipos' => 'Types de carbone',
+    'type.alifaticos' => 'Aliphatiques',
+    'type.aromaticos' => 'Aromatiques',
+    'type.olefinicos' => 'Oléfiniques',
+    'type.otros' => 'Autres',
 ];

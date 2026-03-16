@@ -11,121 +11,151 @@
     <script src="{{ asset('js/spin.js') }}"></script>
     <script src="{{ asset('js/loadingScreen.js') }}"></script>
     <script src="{{ asset('js/loadFamilies.js') }}"></script>
-    <script src="{{ asset('jsme/jsme.nocache.js') }}"></script>
+
     <script type="text/javascript">
-        var jsme;
-        var stereo = true;
-        function switchStereo() {
-            stereo ? jsme.options('nostereo') : jsme.options('stereo');
-            stereo ? text = 'OFF' : text = 'ON';
-            $('#stereoButton').html(text);
-            stereo = !stereo;
-        }
+        var currentMolData  = '';
+        var sketcherReady   = false;
+
+        window.addEventListener('message', function(e) {
+            if (!e.data || e.data.type !== 'chemlab_update') return;
+            currentMolData = e.data.mol || '';
+            sketcherReady  = true;
+            var count = e.data.atomCount || 0;
+            var badge = document.getElementById('atomBadge');
+            if (badge) {
+                badge.textContent = count + ' átomo' + (count !== 1 ? 's' : '');
+                badge.style.display = count > 0 ? 'inline-block' : 'none';
+            }
+        });
 
         function submitForm() {
-            $('#smileCode').val(jsme.smiles());
-            $('#jmeCode').val(jsme.jmeFile());
+            var tieneDibujo = (currentMolData && currentMolData.trim() !== '');
+            document.getElementById('smileCode').value = tieneDibujo ? currentMolData : '';
+            document.getElementById('jmeCode').value   = tieneDibujo ? currentMolData : '';
+            return true;
         }
 
-    </script>
-    <script type="text/javascript">
-        // Al entrar en la búsqueda por subestructura, apagamos el modo "solo seleccionadas"
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                localStorage.setItem('FilterOnlySelected', 'false');
-            } catch (e) {}
-        });
-    </script>
-    <script type="text/javascript">
-        function jsmeOnLoad() {
-            // Forzar tamaño explícito para evitar cálculos negativos de ancho/alto en SVG
-            // cuando el contenedor aún no tiene dimensiones visibles.
-            try {
-                var cont = document.getElementById('jmeVentana');
-                if (cont && (cont.clientWidth <= 0 || cont.clientHeight <= 0)) {
-                    cont.style.width = '500px';
-                    cont.style.height = '350px';
-                }
-            } catch (e) {}
-
-            jsme = new JSApplet.JSME("jmeVentana", "500px", "350px", {
-                 "options" : "newlook,canonize,number,marker"
-            });
+        function clearSketcher() {
+            var frame = document.getElementById('chemlabFrame');
+            if (frame && frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'chemlab_clear' }, '*');
+            }
+            currentMolData = '';
         }
-        ;
+        
     </script>
 @endsection
+
 @section('mainContainer')
+    <style>
+        .main-container {
+            max-width: 90% !important;
+            width: 100% !important;
+            padding-top: 30px !important;
+        }
+
+        .chemlab-outer-wrapper {
+            position: relative;
+            width: 100%;
+            background: #fff;
+        }
+
+        .chemlab-wrapper {
+            width: 100%;
+            height: calc(85vh - 160px);
+            min-height: 500px;
+            border: 1px solid #dde8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chemlab-wrapper iframe {
+            border: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .molab-patch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 190px; 
+            height: 40px;
+            background-color: #f8fbfe; 
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            padding-left: 14px;
+            pointer-events: none;
+            border-right: 1px solid #e1e8ed; 
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .molab-patch .mol-text { color: #4A90E2; font-family: "Segoe UI", Arial, sans-serif; font-size: 17px; font-weight: bold; }
+        .molab-patch .pro-text { color: #5cb85c; font-family: "Segoe UI", Arial, sans-serif; font-size: 17px; margin-left: 3px; }
+
+        .form-col { padding-top: 10px; }
+        .form-col label { font-size: 16px !important; font-weight: bold; display: block; }
+        
+        .family-container {
+            margin-top: 25px !important; 
+            margin-bottom: 20px;
+        }
+
+        .btn-danger { 
+            font-size: 19px !important; 
+            padding: 12px 35px !important; 
+            font-weight: bold !important;
+        }
+    </style>
+
     <section class="container main-container">
         <div class="row">
+            <div class="col-xs-12 text-center" style="margin-bottom: 10px;">
+                <h4 style="margin:0;"><b>{!! trans('applicationResource.form.busquedas.subestructura') !!}</b></h4>
+            </div>
 
-                <div class="row">
-                    <div class="col-xs-12 text-center">
-                        <h4><b>{!! trans('applicationResource.form.busquedas.subestructura') !!}</b></h4><br>
-                    </div>
+            <div class="col-xs-12 col-sm-8 col-md-8">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:5px;">
+                    <span id="atomBadge" style="display:none; background:#e8f4ff; color:#0070aa; border:1px solid #b0d4f0; border-radius:10px; font-size:12px; padding:2px 8px;"></span>
                 </div>
 
-                @if ($errors->has('emptyError'))
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h4 class="help-block">
-                                <strong style="color: red;">{!! trans('applicationResource.errors.requeridos') !!}</strong>
-                            </h4>
-                        </div>
+                <div class="chemlab-outer-wrapper">
+                    <div class="molab-patch">
+                        <span class="mol-text">MoLab</span><span class="pro-text">Pro</span>
                     </div>
-                @endif
-
-                            <!-- Ventana del script para "pintar" las estructuras, se puede modificar el tamaño -->
-                    <div class="col-xs-12 col-sm-6 col-md-5 text-center">
-                        <div class="jmeEditor" name="JME" id="jmeVentana">
-                        </div>
+                    <div class="chemlab-wrapper">
+                        <iframe id="chemlabFrame" src="{{ url('/chemlab-sketcher') }}?v={{ filemtime(public_path('chemlab.html')) }}" title="MoLab Pro"></iframe>
                     </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-6 text-center">
-                    <form class="form-horizontal" role="form" method="POST"
-                          action="{{ url('search/bySubstructure') }}"
-                          onsubmit="showLoading()">
-                        @csrf
-                                <!-- Campo hidden para guardar el código SMILE generado por la estructura-->
-                        <input type="hidden" name="smileCode" id="smileCode">
-                        <!--Campo hidden para guardar el código JME generado por la estructura -->
-                        <input type="hidden" name="jmeCode" id="jmeCode">
-
-                        <div class="form-group row text-center">
-                            <label>{!! trans('applicationResource.form.estereoquimica') !!}
-                            </label>
-                            <button class="btn btn-md btn-danger" onclick="switchStereo()" id="stereoButton"
-                                    type="button">
-                                ON
-                            </button>
-                        </div>
-
-                        <hr class="invisible">
-
-                        <div class="row">
-                        	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-12 ">
-
-                                <div class="form-group row">
-                                    <!--FAMILIA, TIPO, GRUPO-->
-
-                                    @include('search.familiesPartial')
-
-                                </div>
-
-                        	</div>
-                        </div>
-
-                        <hr class="invisible">
-                                <!-- ENVIAR -->
-                        <div class="form-group">
-                            <div class="col-xs-12 col-md-offset-1">
-                                <button class="btn btn-md btn-danger" onclick="submitForm()" type="submit" name="submitBtn"
-                                        value="submitBtn">{!! trans('applicationResource.form.buscar') !!}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4 text-center form-col">
+                <form id="searchForm" role="form" method="POST" action="{{ url('search/bySubstructure') }}" onsubmit="return submitForm() && showLoading()">
+                    @csrf
+                    <input type="hidden" name="smileCode" id="smileCode" value="{{ old('smileCode') }}">
+                    <input type="hidden" name="jmeCode"   id="jmeCode"   value="{{ old('jmeCode') }}">
+
+                    <div class="form-group">
+                        <label>Estereoquímica</label>
+                        <p style="font-size:12px; color:#666;">Usa <strong>W↑</strong> y <strong>W↓</strong></p>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label>Seleccionar Familia</label>
+                        <div class="family-container">
+                            @include('search.familiesPartial')
+                        </div>
+                    </div>
+
+                    <button class="btn btn-md btn-danger" type="submit" name="submitBtn" value="submitBtn">
+                        <i class="fa fa-search"></i> {!! trans('applicationResource.form.buscar') !!}
+                    </button>
+                </form>
+            </div>
         </div>
     </section>
 @endsection

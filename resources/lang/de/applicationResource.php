@@ -380,4 +380,16 @@ return [
     'submenu.nombre' => 'Nach Name',
     'submenu.subestructura' => 'Teilstruktur',
     'submenu.tipocarbono' => 'Kohlenstofftyp',
+
+    'form.busquedas.tiposCarbono' => 'Suche nach Kohlenstofftypen',
+
+    # -- Carbon type tab labels --
+    'type.esqueleto' => 'Skelett',
+    'type.carbono' => 'Kohlenstoffe',
+    'type.heteroatomos' => 'Heteroatome',
+    'type.tipos' => 'Kohlenstofftypen',
+    'type.alifaticos' => 'Aliphatische',
+    'type.aromaticos' => 'Aromatische',
+    'type.olefinicos' => 'Olefinische',
+    'type.otros' => 'Andere',
 ];

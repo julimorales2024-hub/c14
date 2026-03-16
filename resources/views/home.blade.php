@@ -1350,7 +1350,7 @@
     };
 
     const navTranslations = {
-        es: { nav_byname:"Por Nombre", nav_sub:"Subestructura", nav_shift:"Desplazamientos", nav_carbon:"Tipo de Carbono", nav_about:"Acerca de", nav_contact:"Contacto", nav_tools:"Herramientas", menu_login:"Iniciar sesión", menu_register:"Registrarse" },
+        es: { nav_byname:"Por Nombre", nav_sub:"Subestructura", nav_shift:"Desplazamiento", nav_carbon:"Tipo de Carbono", nav_about:"Acerca de", nav_contact:"Contacto", nav_tools:"Herramientas", menu_login:"Iniciar sesión", menu_register:"Registrarse" },
         en: { nav_byname:"By Name", nav_sub:"Substructure", nav_shift:"Chem. Shifts", nav_carbon:"Carbon Type", nav_about:"About", nav_contact:"Contact", nav_tools:"Tools", menu_login:"Log in", menu_register:"Sign up" },
         zh: { nav_byname:"按名称", nav_sub:"子结构", nav_shift:"化学位移", nav_carbon:"碳类型", nav_about:"关于", nav_contact:"联系", nav_tools:"工具", menu_login:"登录", menu_register:"注册" },
         it: { nav_byname:"Per Nome", nav_sub:"Sottostruttura", nav_shift:"Spostamenti", nav_carbon:"Tipo di Carbonio", nav_about:"Informazioni", nav_contact:"Contatto", nav_tools:"Strumenti", menu_login:"Accedi", menu_register:"Registrati" },

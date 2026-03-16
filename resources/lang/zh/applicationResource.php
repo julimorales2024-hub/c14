@@ -372,4 +372,16 @@ return [
     'submenu.nombre' => '按名称',
     'submenu.subestructura' => '子结构',
     'submenu.tipocarbono' => '碳类型',
+
+    'form.busquedas.tiposCarbono' => '按碳类型搜索',
+
+    # -- Carbon type tab labels --
+    'type.esqueleto' => '骨架',
+    'type.carbono' => '碳',
+    'type.heteroatomos' => '杂原子',
+    'type.tipos' => '碳类型',
+    'type.alifaticos' => '脂肪族',
+    'type.aromaticos' => '芳香族',
+    'type.olefinicos' => '烯烃',
+    'type.otros' => '其他',
 ];

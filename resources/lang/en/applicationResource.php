@@ -380,4 +380,16 @@ return [
     'submenu.nombre' => 'By name',
     'submenu.subestructura' => 'Substructure',
     'submenu.tipocarbono' => 'Carbon type',
+
+    'form.busquedas.tiposCarbono' => 'Search by carbon types',
+
+    # -- Carbon type tab labels --
+    'type.esqueleto' => 'Skeleton',
+    'type.carbono' => 'Carbons',
+    'type.heteroatomos' => 'Heteroatoms',
+    'type.tipos' => 'Carbon Types',
+    'type.alifaticos' => 'Aliphatics',
+    'type.aromaticos' => 'Aromatics',
+    'type.olefinicos' => 'Olefins',
+    'type.otros' => 'Others',
 ];
